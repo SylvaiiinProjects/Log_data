@@ -75,5 +75,5 @@ def post(wrapped_data):
 if __name__ == '__main__':
     PIN = get_env('pin')
     LOCAL_STORE = 'pin_data_' + str(PIN)
-    get_pin_value(PIN)
-    #post(wrap(append(timestamp(get_pin_value(PIN)))))
+    
+    post(wrap(append(timestamp(get_pin_value(PIN)))))
