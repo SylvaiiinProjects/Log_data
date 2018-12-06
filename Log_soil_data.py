@@ -50,7 +50,7 @@ def get_pin_value(pin):
         no_data_error()
         sys.exit(0)
     else:
-        data()
+        data(value)
         sys.exit(0)
     return value
 
