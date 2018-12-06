@@ -13,9 +13,9 @@ HEADERS = {
     'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),
     'content-type': 'application/json'}
 
-def get_input_env(key):
+def get_input_env():
     prefix = FARMWARE_NAME        
-    input_title = os.environ.get(prefix+"_", 'key')
+    input_title = os.environ.get(prefix+"_pin", '64')
     return input_title
 
 
@@ -75,6 +75,6 @@ def post(wrapped_data):
 
 if __name__ == '__main__':
     #PIN = get_env('pin')    
-    PIN = get_input_env('pin')
+    PIN = get_input_env()
     get_pin_value(PIN)
     
