@@ -27,6 +27,16 @@ def no_data_error():
             'message': message}}
     post(wrapped_message)
 
+def data(value):
+    
+    message = '[Save sensor data] Pin {} value  available {}.'.format(PIN,value)
+    wrapped_message = {
+        'kind': 'send_message',
+        'args': {
+            'message_type': 'error',
+            'message': message}}
+    post(wrapped_message)
+
 def get_pin_value(pin):
     """ Sequence `Read Pin` """
     response = requests.get(
@@ -38,6 +48,9 @@ def get_pin_value(pin):
         value = None
     if value is None:
         no_data_error()
+        sys.exit(0)
+    else:
+        data()
         sys.exit(0)
     return value
 
@@ -74,6 +87,5 @@ def post(wrapped_data):
 
 if __name__ == '__main__':
     PIN = get_env('pin')
-    LOCAL_STORE = 'pin_data_' + str(PIN)
-    
+    LOCAL_STORE = 'pin_data_' + str(PIN)    
     post(wrap(append(timestamp(get_pin_value(PIN)))))
