@@ -13,13 +13,13 @@ HEADERS = {
     'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),
     'content-type': 'application/json'}
 
-def get_input_env():
+"""def get_input_env():
     prefix = FARMWARE_NAME        
-    input_title = int(os.environ.get(prefix+"_pin"))
-    return input_title
+    input_title = os.environ.get(prefix+"_pin")
+    return input_title"""
 
 
-
+""" 64 is always taken """
 def get_env(key, type_=int):
     
     return type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key),64))
@@ -74,7 +74,7 @@ def post(wrapped_data):
                   data=payload, headers=HEADERS)
 
 if __name__ == '__main__':
-    #PIN = get_env('pin')    
-    PIN = get_input_env()
+    PIN = get_env('pin')    
+    #PIN = get_input_env()
     get_pin_value(PIN)
     
