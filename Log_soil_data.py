@@ -15,7 +15,7 @@ HEADERS = {
 
 def get_env(key, type_=int):
     
-    return type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key)))
+    return type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key),64))
 
 def no_data():
     
