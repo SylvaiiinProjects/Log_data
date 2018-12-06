@@ -8,14 +8,14 @@ import json
 from time import time
 import requests
 
-FARMWARE_NAME = 'Log_soilr_data'
+FARMWARE_NAME = 'Log_soil_data'
 HEADERS = {
     'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),
     'content-type': 'application/json'}
 
 def get_env(key, type_=int):
     
-    return type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key), 64))
+    return type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key)))
 
 def no_data():
     
