@@ -15,7 +15,7 @@ HEADERS = {
 
 def get_input_env():
     prefix = FARMWARE_NAME        
-    input_title = os.environ.get(prefix+"_pin", '64')
+    input_title = os.environ.get(prefix+"_pin")
     return input_title
 
 
