@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Log soil sensor data."""
+"""Log soil sensor value."""
 
 import os
 import sys
@@ -9,7 +9,7 @@ import requests
 import numpy as np
 
 
-FARMWARE_NAME = 'Log_soil_data'
+FARMWARE_NAME = Log_Value'
 HEADERS = {    'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),    'content-type': 'application/json'}
 
 
@@ -33,37 +33,40 @@ def no_data_error():
             'message': message}}
     post(wrapped_message)
 
-def data():
-    
-    message = '[Log sensor data] Value is {}.'.format(value)
+def log_value():
+
+    message = '[Log sensor value] Value for pin {} is {}.'.format(PIN,value)
     wrapped_message = {
         'kind': 'send_message',
         'args': {
             'message_type': 'error',
             'message': message}}
     post(wrapped_message)
+   
 
 def get_pin_value(pin): 
    """Get the value read by a Sequence `Read Pin` step or the Sensor widget."""
   
   response = requests.get(  os.environ['FARMWARE_URL'] + 'api/v1/bot/state',   headers=HEADERS)
     try:       
-	 		value = response.json()['pins'][str(pin)]['value']
+	 value = response.json()['pins'][str(pin)]['value']
 			
     except KeyError:   
    		  value = None
 		  
      if value is None:   
-  	     no_data_error() 
-  	     sys.exit(0)
-	else:
-	     data()
-		 sys.exit(0)
-   return 0
+  	   no_data_error() 
+  	   sys.exit(0)
+	 
+     else:
+	   log_value()
+	   sys.exit(0) 
+	 	
+   
 
 
 
 if __name__ == '__main__':
     PIN = get_env('pin')
-    get_pin_data(PIN)
+    post(get_pin_value(PIN))
     
