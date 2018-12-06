@@ -8,7 +8,7 @@ import json
 from time import time
 import requests
 
-FARMWARE_NAME = 'save_sensor_value'
+FARMWARE_NAME = 'Log_soilr_data'
 HEADERS = {
     'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),
     'content-type': 'application/json'}
@@ -17,9 +17,9 @@ def get_env(key, type_=int):
     
     return type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key), 64))
 
-def no_data_error():
+def no_data():
     
-    message = '[Save sensor data] Pin {} value not available.'.format(PIN)
+    message = '[Soil sensor Value] Pin {} value is not available.'.format(PIN)
     wrapped_message = {
         'kind': 'send_message',
         'args': {
@@ -29,7 +29,7 @@ def no_data_error():
 
 def data(value):
     
-    message = '[Save sensor data] Pin {} value  available {}.'.format(PIN,value)
+    message = '[Soil sensor Value] Pin {} value  is {}.'.format(PIN,value)
     wrapped_message = {
         'kind': 'send_message',
         'args': {
@@ -47,7 +47,7 @@ def get_pin_value(pin):
     except KeyError:
         value = None
     if value is None:
-        no_data_error()
+        no_data()
         sys.exit(0)
     else:
         data(value)
@@ -58,26 +58,7 @@ def timestamp(value):
     """Add a timestamp to the pin value."""
     return {'time': time(), 'value': value}
 
-def append(data):
-    """Add new data to existing data."""
-    try:
-        existing_data = json.loads(os.environ[LOCAL_STORE])
-    except KeyError:
-        existing_data = []
-    existing_data.append(data)
-    return existing_data
 
-def wrap(data):
-    """Wrap the data in a `set_user_env` Celery Script command to save it."""
-    return {
-        'kind': 'set_user_env',
-        'args': {},
-        'body': [{
-            'kind': 'pair',
-            'args': {
-                'label': LOCAL_STORE,
-                'value': json.dumps(data)
-            }}]}
 
 def post(wrapped_data):
     """Send the Celery Script command."""
@@ -87,6 +68,5 @@ def post(wrapped_data):
 
 if __name__ == '__main__':
     PIN = get_env('pin')
-    LOCAL_STORE = 'pin_data_' + str(PIN)  
     get_pin_value(PIN)
-    #post(wrap(append(timestamp(get_pin_value(PIN)))))
+    
