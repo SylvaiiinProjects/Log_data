@@ -9,7 +9,7 @@ import requests
 import numpy as np
 
 
-FARMWARE_NAME = 'log_sensor_data'
+FARMWARE_NAME = 'Log_soil_data'
 HEADERS = {    'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),    'content-type': 'application/json'}
 
 
@@ -33,7 +33,15 @@ def no_data_error():
             'message': message}}
     post(wrapped_message)
 
-
+def data():
+    
+    message = '[Log sensor data] Value is {}.'.format(value)
+    wrapped_message = {
+        'kind': 'send_message',
+        'args': {
+            'message_type': 'error',
+            'message': message}}
+    post(wrapped_message)
 
 def get_pin_value(pin): 
    """Get the value read by a Sequence `Read Pin` step or the Sensor widget."""
@@ -46,18 +54,11 @@ def get_pin_value(pin):
    		  value = None
 		  
      if value is None:   
-  	   no_data_error() 
-  	   sys.exit(0)
-	 
-	 else: 
-	 	message = '[Log sensor value] Value for pin {} is {}.'.format(PIN,value)
-    wrapped_message = {
-        'kind': 'send_message',
-        'args': {
-            'message_type': 'error',
-            'message': message}}
-    post(wrapped_message)
-   
+  	     no_data_error() 
+  	     sys.exit(0)
+	else:
+	     data()
+		 sys.exit(0)
    return 0
 
 
