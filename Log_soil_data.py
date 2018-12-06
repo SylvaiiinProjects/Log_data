@@ -16,6 +16,7 @@ HEADERS = {
 def get_input_env(key):
     prefix = FARMWARE_NAME        
     input_title = os.environ.get(prefix+"_", 'key')
+    return input_title
 
 
 
@@ -73,8 +74,7 @@ def post(wrapped_data):
                   data=payload, headers=HEADERS)
 
 if __name__ == '__main__':
-    #PIN = get_env('pin')
-    get_input_env('pin')
-    PIN = input_title
+    #PIN = get_env('pin')    
+    PIN = get_input_env('pin')
     get_pin_value(PIN)
     
