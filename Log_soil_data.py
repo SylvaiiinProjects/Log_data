@@ -8,7 +8,7 @@ import json
 from time import time
 import requests
 
-FARMWARE_NAME = 'Log_soil_data'
+FARMWARE_NAME = 'Log Value'
 HEADERS = {
     'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),
     'content-type': 'application/json'}
