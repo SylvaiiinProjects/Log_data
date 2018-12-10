@@ -21,9 +21,8 @@ HEADERS = {
 
 """ 64 is always taken """
 def get_env(key, type_=int):
-    VALUE = os.environ['FARMWARE_NAME'+'_'+str(key)]
-    #type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key),64))
-    return type_(VALUE)
+    
+    return type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key),64))
 
 def no_data():
     
