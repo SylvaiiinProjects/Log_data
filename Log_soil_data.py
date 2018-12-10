@@ -51,15 +51,16 @@ def get_pin_value(pin):
         headers=HEADERS)
     try:
         value = response.json()['pins'][str(pin)]['value']
+        value1 = response.json()['location_data']['position']['x'
     except KeyError:
-        value = None
+        value1 = None
     if value is None:
         no_data()
         sys.exit(0)
     else:
-        data(value)
+        data(value1)
         sys.exit(0)
-    return value
+    return value1
 
 def timestamp(value):
     """Add a timestamp to the pin value."""
