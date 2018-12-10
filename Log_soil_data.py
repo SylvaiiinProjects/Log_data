@@ -51,7 +51,7 @@ def get_pin_value(pin):
         headers=HEADERS)
     try:
         value = response.json()['pins'][str(pin)]['value']
-        value1 = response.json()['location_data']['position']['x'
+        value1 = response.json()['location_data']['position']['x']
     except KeyError:
         value1 = None
     if value is None:
