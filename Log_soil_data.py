@@ -50,17 +50,17 @@ def get_pin_value(pin):
         os.environ['FARMWARE_URL'] + 'api/v1/bot/state',
         headers=HEADERS)
     try:
-        #value = response.json()['pins'][str(pin)]['value']
-        value1 = response.json()['location_data']['position']['x']
+        value = response.json()['pins'][str(pin)]['value']
+        #value1 = response.json()['location_data']['position']['x']
     except KeyError:
-        value1 = None
-    if value1 is None:
+        value = None
+    if value is None:
         no_data()
         sys.exit(0)
     else:
-        data(value1)
+        data(value)
         sys.exit(0)
-    return value1
+    return value
 
 def timestamp(value):
     """Add a timestamp to the pin value."""
