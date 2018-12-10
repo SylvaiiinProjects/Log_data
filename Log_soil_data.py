@@ -8,7 +8,7 @@ import json
 from time import time
 import requests
 
-FARMWARE_NAME = 'Log Value'
+FARMWARE_NAME = 'Log_Value'
 HEADERS = {
     'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),
     'content-type': 'application/json'}
@@ -21,8 +21,9 @@ HEADERS = {
 
 """ 64 is always taken """
 def get_env(key, type_=int):
-    
-    return type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key),64))
+    VALUE = os.environ['FARMWARE_NAME'+'_'+str(key)]
+    #type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key),64))
+    return type_(VALUE)
 
 def no_data():
     
