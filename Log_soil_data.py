@@ -130,7 +130,7 @@ if __name__ == '__main__':
     #PIN = get_input_env()
     #data(post(read_pin(number=64,mode=0, label='Value is ')))
     #pour afficher directement la valeur obtenue
-    _print_json(read_pin(number=64,mode=0, label='Value is '))
+    data(_print_json(read_pin(number=64,mode=0, label='Value is ')))
     get_pin_value(PIN)
     
 
