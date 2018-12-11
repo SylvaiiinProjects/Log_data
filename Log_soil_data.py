@@ -45,27 +45,22 @@ def data(value):
     post(wrapped_message)
 
 def get_pin_value(pin):
-    """ Sequence `Read Pin` """
+    """ Sequence `Read Pin`et séquence position du bras suivant x """
     response = requests.get(
         os.environ['FARMWARE_URL'] + 'api/v1/bot/state',
         headers=HEADERS)
     try:
-        #value = response.json()['pins'][str(pin)]['value']
-        value1 = response.json()['location_data']['position']['x']
+        value0 = response.json()['pins'][str(pin)]['value']
+        #value1 = response.json()['location_data']['position']['x']
     except KeyError:
-        value1 = None
-    if value1 is None:
+        value0 = None
+    if value0 is None:
         no_data()
         sys.exit(0)
     else:
-        data(value1)
+        data(value0)
         sys.exit(0)
-    return value1
-
-def timestamp(value):
-    """Add a timestamp to the pin value."""
-    return {'time': time(), 'value': value}
-
+    return value0
 
 
 def post(wrapped_data):
