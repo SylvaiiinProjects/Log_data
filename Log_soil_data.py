@@ -18,8 +18,8 @@ HEADERS = {
     input_title = os.environ.get(prefix+"_pin")
     return input_title"""
 
-
 """ 64 is always taken """
+
 def get_env(key, type_=int):
     
     return type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key),64))
@@ -50,17 +50,17 @@ def get_pin_value(pin):
         os.environ['FARMWARE_URL'] + 'api/v1/bot/state',
         headers=HEADERS)
     try:
-        value = response.json()['pins'][str(pin)]['value']
-        #value1 = response.json()['location_data']['position']['x']
+        #value = response.json()['pins'][str(pin)]['value']
+        value1 = response.json()['location_data']['position']['x']
     except KeyError:
-        value = None
-    if value is None:
+        value1 = None
+    if value1 is None:
         no_data()
         sys.exit(0)
     else:
-        data(value)
+        data(value1)
         sys.exit(0)
-    return value
+    return value1
 
 def timestamp(value):
     """Add a timestamp to the pin value."""
@@ -71,8 +71,7 @@ def timestamp(value):
 def post(wrapped_data):
     """Send the Celery Script command."""
     payload = json.dumps(wrapped_data)
-    requests.post(os.environ['FARMWARE_URL'] + 'api/v1/celery_script',
-                  data=payload, headers=HEADERS)
+    requests.post(os.environ['FARMWARE_URL'] + 'api/v1/celery_script',     data=payload, headers=HEADERS)
 
 if __name__ == '__main__':
     PIN = get_env('pin')    
