@@ -73,8 +73,8 @@ def post(wrapped_data):
     requests.post(os.environ['FARMWARE_URL'] + 'api/v1/celery_script',     data=payload, headers=HEADERS)
 
 if __name__ == '__main__':
-    PINs = get_env('pin') 
-    data(get_env('pin'))   
+    PIN = get_env('PIN') 
+    data(get_env('PIN'))   
     #PIN = get_input_env()
-    get_pin_value(PINs)
+    get_pin_value(PIN)
     
