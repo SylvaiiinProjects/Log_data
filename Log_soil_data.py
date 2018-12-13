@@ -8,7 +8,9 @@ import json
 from time import time
 import requests
 
-FARMWARE_NAME = 'Log_Value'
+farmware = 'Log Value'
+FARMWARE_NAME = farmware.replace(' ', '_').replace('-', '_').lower()
+
 HEADERS = {
     'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),
     'content-type': 'application/json'}
@@ -21,6 +23,7 @@ HEADERS = {
 """ 64 is always taken """
 
 def get_env(key, type_=int):
+	""" key = Farmware input name"""
     
     return type_(os.getenv('{}_{}'.format(FARMWARE_NAME, key),64))
 
@@ -50,7 +53,8 @@ def get_pin_value(pin):
         os.environ['FARMWARE_URL'] + 'api/v1/bot/state',
         headers=HEADERS)
     try:
-        value0 = response.json()['pins'][str(pin)]['value']
+        value0 = json.loads(os.getenv('pin_data_' + str(pin), '[]'))
+	#value0 = response.json()['pins'][str(pin)]['value']
         #value1 = response.json()['location_data']['position']['x']
     except KeyError:
         value0 = None
@@ -69,7 +73,8 @@ def post(wrapped_data):
     requests.post(os.environ['FARMWARE_URL'] + 'api/v1/celery_script',     data=payload, headers=HEADERS)
 
 if __name__ == '__main__':
-    PIN = get_env('pin')    
+    PIN = get_env('pin') 
+    data(get_env('pin'))   
     #PIN = get_input_env()
     get_pin_value(PIN)
     
