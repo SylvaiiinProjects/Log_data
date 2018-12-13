@@ -3,14 +3,14 @@
  "language": "python",
  "author": "SV",
  "description": "Print the soil sensor value.",
- "version": "1.2.7",
+ "version": "1.2.8",
  "min_os_version_major": 6,
  "url": "https://raw.githubusercontent.com/SylvaiiinProjects/Log_data/master/manifest.json",
  "zip": "https://github.com/SylvaiiinProjects/Log_data/archive/master.zip",
  "executable": "python",
  "args": ["Log_data-master/Log_soil_data.py"],
  "config": [
-   {"name": "pin", "label": "pin", "value": 64 }
+   {"name": "pin", "label": "pinnnn", "value": 64 }
    
  ]
 }
