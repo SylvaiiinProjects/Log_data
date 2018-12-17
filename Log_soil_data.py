@@ -64,7 +64,7 @@ def get_pin_value(pin):
     else:
         data(value0)
         sys.exit(0)
-    return value0
+    #return value
 
 
 def post(wrapped_data):
