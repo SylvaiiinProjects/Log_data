@@ -3,7 +3,7 @@
  "language": "python",
  "author": "SV",
  "description": "Print the soil sensor value.",
- "version": "1.3.6",
+ "version": "1.3.7",
  "min_os_version_major": 6,
  "url": "https://raw.githubusercontent.com/SylvaiiinProjects/Log_data/master/manifest.json",
  "zip": "https://github.com/SylvaiiinProjects/Log_data/archive/master.zip",

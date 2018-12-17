@@ -18,13 +18,13 @@ response = requests.get(os.environ['FARMWARE_URL'] + 'api/v1/bot/state',
               headers=headers)
 
 
-def no_data(PIN):
+def no_data(PIN,value):
     
-    message = '[soil] Pin {} value .'.format(PIN)
+    message = '[soil] Pin {} is {} .'.format(PIN,value)
     wrapped_message = {
         'kind': 'send_message',
         'args': {
-            'message_type': 'error',
+            'message_type': 'info',
             'message': message}}
     post(wrapped_message)
 
@@ -37,9 +37,9 @@ def post(wrapped_data):
 
 bot_state = response.json()
 position_x = bot_state['location_data']['position']['x']
-pin_64_value = bot_state['pins']['64']['value']
+value = bot_state['pins']['64']['value']
 PIN = 64
 
-no_data(PIN)
+no_data(PIN,value)
 
 
