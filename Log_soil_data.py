@@ -53,9 +53,9 @@ def get_pin_value(pin):
         os.environ['FARMWARE_URL'] + 'api/v1/bot/state',
         headers=HEADERS)
     try:
-        value0 = json.loads(os.getenv('pin_data_' + str(pin), '[]'))
+        #value0 = json.loads(os.getenv('pin_data_' + str(pin), '[]'))
 	#value0 = response.json()['pins'][str(pin)]['value']
-        #value1 = response.json()['location_data']['position']['x']
+        value0 = response.json()['location_data']['position']['x']
     except KeyError:
         value0 = None
     if value0 is None:
