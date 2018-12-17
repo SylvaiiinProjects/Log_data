@@ -40,6 +40,6 @@ posx = bot_state['location_data']['position']['x']
 value = bot_state['pins']['64']['value']
 PIN = 64
 
-no_data(PIN,value)
+no_data(PIN,value, posx)
 
 
