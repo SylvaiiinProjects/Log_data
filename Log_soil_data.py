@@ -2,6 +2,7 @@
 
 import os
 import requests
+import json
 
 headers = {
   'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),
@@ -13,11 +14,11 @@ HEADERS = {
 'content-type': 'application/json'}
 
 
-response = requests.get(os.environ['FARMWARE_URL'] + '/api/v1/bot/state',
+response = requests.get(os.environ['FARMWARE_URL'] + 'api/v1/bot/state',
               headers=headers)
 
 
-def no_data():
+def no_data(PIN):
     
     message = '[soil] Pin {} value .'.format(PIN)
     wrapped_message = {
@@ -39,6 +40,6 @@ position_x = bot_state['location_data']['position']['x']
 pin_64_value = bot_state['pins']['64']['value']
 PIN = 64
 
-no_data()
+no_data(PIN)
 
 
