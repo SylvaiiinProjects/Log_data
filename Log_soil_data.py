@@ -8,8 +8,8 @@ import json
 from time import time
 import requests
 
-farmware = 'Log Value'
-FARMWARE_NAME = farmware.replace(' ', '_').replace('-', '_').lower()
+FARMWARE_NAME = 'log_value'
+#FARMWARE_NAME = farmware.replace(' ', '_').replace('-', '_').lower()
 
 HEADERS = {
     'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),
@@ -74,7 +74,7 @@ def post(wrapped_data):
 
 if __name__ == '__main__':
     PIN = get_env('PIN') 
-    data(get_env('PIN'))   
+    #data(get_env('PIN'))   
     #PIN = get_input_env()
     get_pin_value(PIN)
     
