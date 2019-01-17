@@ -14,10 +14,9 @@ HEADERS = {
 'content-type': 'application/json'}
 
 
-#response = requests.get(os.environ['FARMWARE_URL'] + 'api/v1/bot/state',
-#              headers=headers)
-response = requests.get(os.environ['FARMWARE_URL'] + 'api/device',
+response = requests.get(os.environ['FARMWARE_URL'] + 'api/v1/bot/state',
               headers=headers)
+
 
 
 def no_data(pin,value,posx):
@@ -37,12 +36,10 @@ def post(wrapped_data):
    data=payload, headers=HEADERS)
 
 
-#bot_state = response.json()
-#posx = bot_state['location_data']['position']['x']
-#value = bot_state['pins']['64']['value']
+bot_state = response.json()
+posx = bot_state['location_data']['position']['x']
+value = bot_state['pins']['64']['value']
 PIN = 64
-value=str(response.json())
-posx=3
 
 no_data(PIN,value, posx)
 
