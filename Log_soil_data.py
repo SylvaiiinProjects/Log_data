@@ -41,7 +41,7 @@ def post(wrapped_data):
 #posx = bot_state['location_data']['position']['x']
 #value = bot_state['pins']['64']['value']
 PIN = 64
-value=response.json()
+value=str(response.json())
 posx=3
 
 no_data(PIN,value, posx)
