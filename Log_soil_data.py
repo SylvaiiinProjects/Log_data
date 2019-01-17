@@ -30,7 +30,7 @@ def no_data(pin,value,posx):
 
 def post(wrapped_data):
     
-    payload = json.dumps(wrapped_data)
+    payload = json.dumps(wrapped_data) # convert string as object
     requests.post(os.environ['FARMWARE_URL'] + 'api/v1/celery_script',
    data=payload, headers=HEADERS)
 
